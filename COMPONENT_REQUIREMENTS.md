@@ -6,7 +6,7 @@ This document breaks down the high-level Product Requirements (PRD) into granula
 **Objective:** Provide a standardized, version-controllable way for users to define their test suites.
 - **Format:** Users will define test cases, rubrics, and agent personas using **YAML or JSON** configuration files.
 - **RAG Data Handling:** For RAG-specific evaluation, the framework must support ingesting expected context/ground truth via **Excel (.xlsx/.csv)** files. This caters to scenarios where the target app does not natively return its retrieved context.
-- **Behavior-Driven Development (BDD):** The framework will natively integrate with `pytest-bdd`, allowing tests to be written in Gherkin syntax (Given/When/Then) if desired by the user.
+- **Flexible Test Execution:** Built natively on `pytest`, users can write standard Python tests to leverage all existing `pytest` features, plugins, and fixtures. It also fully supports `pytest-bdd` for users who prefer writing tests in Gherkin syntax (Given/When/Then).
 
 ## 2. LLM Evaluator Engine (The "Judge")
 **Objective:** The core brain of the framework responsible for grading target responses and roleplaying personas.
