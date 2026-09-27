@@ -1,39 +1,36 @@
 # Product Requirements Document (PRD)
 
 ## Product Vision
-Garuda AI is an intuitive, highly capable AI assistant framework designed to act as an autonomous digital worker. It is simple to use but powerful enough to handle complex, multi-step tasks across a user's environment. 
+Garuda AI is a comprehensive, one-stop framework designed specifically for testing, evaluating, and securing Large Language Model (LLM) applications. It empowers QA engineers, security researchers, and developers to rigorously validate LLM behaviors, safety guardrails, and functional accuracy through automated, agent-driven testing.
 
 ## Target Audience
-Developers, researchers, and power users who want to automate workflows, research, and coding tasks without needing to micromanage the AI.
+- **QA & Automation Engineers:** Need to verify that LLM features meet business logic and functional requirements.
+- **Security & Penetration Testers:** Need to probe LLM applications for vulnerabilities, data leakage, and prompt injections.
+- **AI Safety Researchers:** Need to red-team models to ensure compliance with safety and ethical guidelines.
 
 ## Core Functional Requirements
 
-### 1. Natural Language Interaction
-- **Chat Interface:** Users can interact with the system using everyday conversational language.
-- **Intent Recognition:** The system must accurately understand what the user wants to achieve, whether it's a direct command or a vague objective.
+### 1. LLM Red Teaming & Penetration Testing
+- **Adversarial Probing:** The framework must support automated generation and execution of adversarial prompts (e.g., prompt injections, jailbreaks) to test the target LLM's safety guardrails.
+- **Vulnerability Scanning:** Capable of testing the LLM's orchestration layer for common AI vulnerabilities (e.g., unauthorized tool use, insecure output handling, data exfiltration).
+- **Boundary Testing:** Evaluate how the LLM handles malformed inputs, extreme context lengths, and ambiguous instructions.
 
-### 2. Autonomous Task Execution
-- **Goal-Oriented Action:** The user can give a high-level goal (e.g., "Build a weather app"), and the system will figure out the steps required to achieve it.
-- **Self-Correction:** If the system encounters an error or a dead end, it must be able to recognize the failure, adjust its approach, and try again without user intervention.
+### 2. Functional & Regression Testing
+- **Test Case Execution:** Users can define specific test cases, expected outputs, and behavioral constraints for the LLM application.
+- **Structured Output Validation:** The system must verify that the target LLM returns data in the correct format (e.g., valid JSON, specific schemas) when requested.
+- **Context Retention Testing:** Verify that the target application correctly maintains memory and context over long, multi-turn interactions.
 
-### 3. Environment Interaction (Tools & Actions)
-- **File System Operations:** The system can read, create, edit, and delete files on the user's computer.
-- **Command Line Execution:** The system can run terminal commands, scripts, and background processes.
-- **Web Browsing & Search:** The system can search the internet for information, read documentation, and summarize web content.
+### 3. Autonomous Evaluator Agent (LLM-as-a-Judge)
+- **Conversational Probing:** An autonomous "Judge" agent that can initiate multi-turn conversations with the target LLM application to explore complex logic trees dynamically.
+- **Instruction-Based Validation:** The Evaluator Agent will review the target LLM's responses and grade them based on a set of user-provided instructions, rubrics, or test cases.
+- **Cross-Agent Validation:** The ability to spin up multiple distinct Persona Agents (e.g., "The Angry Customer", "The Confused User") to interact with the target LLM and validate how it handles different communication styles.
 
-### 4. Multi-Agent Collaboration
-- **Task Delegation:** For complex tasks, the system can act as a manager, breaking the work down and delegating sub-tasks to specialized "subagents" (e.g., a researcher agent, a coder agent, a reviewer agent).
-- **Consolidated Reporting:** The system gathers the results from all subagents and presents a unified solution to the user.
-
-### 5. Memory & Context
-- **Conversation History:** The system remembers past interactions within a session so the user doesn't have to repeat themselves.
-- **Long-Term Recall:** The system can learn user preferences over time (e.g., coding styles, preferred tools) and apply them to future tasks.
-
-### 6. Safety and User Control
-- **Human-in-the-Loop:** For critical or destructive actions (like deleting a database or spending money), the system must pause and request explicit user approval before proceeding.
-- **Transparency:** The system must always be able to explain *what* it is doing and *why* it is doing it, providing a clear trail of its thought process.
+### 4. Comprehensive Reporting & Analytics
+- **Test Execution Reports:** Generate clear, human-readable summaries of what was tested, what passed, and what failed.
+- **Vulnerability Matrix:** Provide a detailed breakdown of security flaws or jailbreaks discovered during Red Teaming, including the exact prompt that caused the failure.
+- **Exportable Artifacts:** Reports must be exportable in standard formats (e.g., HTML, PDF, Markdown) for sharing with stakeholders and development teams.
 
 ## Success Criteria
-- A user can provide a single, complex prompt and step away while the system completes the task.
-- The system gracefully recovers from at least 80% of common errors without asking the user for help.
-- The framework is simple enough that a new user can configure and run their first agent within 5 minutes.
+- A tester can define a testing rubric and point Garuda AI at a target LLM endpoint to automatically generate a comprehensive vulnerability and functional report.
+- The Autonomous Evaluator Agent can accurately flag hallucinations, formatting errors, and safety violations with a high degree of reliability.
+- The framework reduces the manual effort required for LLM regression testing and red teaming by at least 80%.
