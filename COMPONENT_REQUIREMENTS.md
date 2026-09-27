@@ -11,25 +11,29 @@ This document breaks down the high-level Product Requirements (PRD) into granula
 ## 2. LLM Evaluator Engine (The "Judge")
 **Objective:** The core brain of the framework responsible for grading target responses and roleplaying personas.
 - **Primary Provider:** Initial implementation will default to **Groq** for high-speed inference.
-- **Extensibility:** The engine must be provider-agnostic, supporting Cloud APIs (OpenAI, Anthropic) and Local Models (Ollama, vLLM) interchangeably via a unified interface (e.g., LiteLLM or LangChain).
+- **Extensibility:** The engine must be provider-agnostic, supporting Cloud APIs (OpenAI, Anthropic) and Local Models (Ollama, vLLM) interchangeably via a unified interface.
 - **Evaluation Logic:** The framework will adopt **DeepEval's structure** for RAG evaluation metrics (e.g., Contextual Precision, Contextual Recall, Faithfulness, Answer Relevance).
+- **Determinism Controls (Flakiness Handling):** Users can explicitly configure agent generation parameters (like `temperature`). Additionally, users can opt into a **"Consensus Mode"** (e.g., run the evaluation 3 times and take the majority vote) at runtime to ensure CI stability.
+- **Rate Limiting & Cost Control:** The framework will include built-in rate limit handling (e.g., exponential backoff) configurable by the user, preventing test suite crashes from HTTP 429 errors.
 
 ## 3. Target Application Interface (Adapter Layer)
 **Objective:** How Garuda AI connects to the systems it is testing.
-- **Hybrid Connectivity:** The framework must support two modes of interaction with the target application:
-  1. **HTTP/REST API Adapter:** For testing deployed services (e.g., sending JSON payloads to a `/chat` endpoint).
-  2. **Direct Python SDK Adapter:** For testing Python functions/classes directly in memory without network overhead (useful for unit/integration testing in CI).
+- **User-Defined Wrappers (BYO-Adapter):** Because target API schemas and streaming protocols (SSE, WebSockets) vary wildly, Garuda AI will *not* attempt to parse them natively. Instead, the framework will define an Interface/Base Class.
+  - The Framework generates the prompt (input).
+  - The **User** writes a custom Python wrapper (HTTP or SDK) to hit their specific target app and aggregate any streaming responses.
+  - The Framework consumes the final aggregated string/JSON output for evaluation.
+- **State & Context Maintenance:** The Evaluator testing agent will maintain conversation state (using Session IDs or Message IDs) internally and pass these to the user's wrapper, ensuring context isolation across parallel test runs.
 
-## 4. Reporting & CI/CD Component
-**Objective:** Generate actionable, enterprise-grade reports that plug directly into CI/CD pipelines.
-- **Test Runner:** The framework will utilize `pytest` under the hood.
-- **Allure Integration:** Test runs must generate **Allure Reports** to provide rich, visual dashboards for stakeholders.
-- **Cucumber JSON:** Execution must output **Cucumber JSON** artifacts (via `pytest-bdd`) to integrate with broader enterprise test management tools.
-- **Pipeline Native:** Exit codes must cleanly fail pipelines (Exit Code 1) if safety guardrails or core functional tests fail.
+## 4. Reporting & Execution Component
+**Objective:** Generate actionable reports and run independently or within CI/CD.
+- **Standalone Execution:** CI/CD integration is strictly optional. The framework functions perfectly as a local command-line testing tool.
+- **Test Runner:** The framework utilizes `pytest` under the hood.
+- **Allure Integration:** Test runs generate **Allure Reports** to provide rich, visual dashboards.
+- **Cucumber JSON:** Execution outputs **Cucumber JSON** artifacts (via `pytest-bdd`) to integrate with enterprise test management tools.
 
 ## 5. Component Architecture Summary
 To support the above, the codebase will be structured into the following distinct modules:
-- `garuda/config`: YAML/JSON parsers and Excel data loaders.
-- `garuda/evaluators`: Groq-powered Judge agents and DeepEval-style metric implementations.
-- `garuda/adapters`: HTTP and Python SDK clients for target communication.
-- `garuda/runners`: `pytest-bdd` wrappers and Allure/Cucumber reporting hooks.
+- `garuda/config`: YAML/JSON parsers, Excel data loaders, and Rate Limit configurations.
+- `garuda/evaluators`: Groq-powered Judge agents, Consensus voting logic, and DeepEval metrics.
+- `garuda/adapters`: Base classes and interfaces for users to implement their target app wrappers.
+- `garuda/runners`: `pytest-bdd` wrappers, Allure hooks, and Cucumber JSON generation.
