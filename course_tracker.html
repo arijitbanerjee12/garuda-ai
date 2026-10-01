@@ -68,9 +68,10 @@ const M=[
 ["Inspect AI & Advanced Evals",5,[["Inspect AI","https://github.com/UKGovernmentBEIS/inspect_ai"]],"Port one suite to Inspect; compare ergonomics."],
 ["CI/CD gating & Regression",4,[["promptfoo CI","https://www.promptfoo.dev/docs/integrations/ci-cd/"]],"Fail PRs on security-score regressions."]]],
 
-["3. Prompt Injection & Jailbreaks","The core offensive skill set.",[
+["3. Prompt Injection, Jailbreaks & System Leaks","The core offensive skill set (OWASP LLM01 & LLM07).",[
 ["Direct vs indirect prompt injection",5,[["Greshake et al.","https://arxiv.org/abs/2302.12173"],["PortSwigger","https://portswigger.net/web-security/llm-attacks"]],"Finish PortSwigger LLM labs."],
 ["Jailbreak families (Roleplay, Encoding)",5,[["Many-shot","https://www.anthropic.com/research/many-shot-jailbreaking"]],"Build a 100-prompt taxonomy-labelled attack set."],
+["System Prompt Leakage (OWASP LLM07)",4,[["Prompt Leakage","https://github.com/LouisShark/chatgpt_system_prompt"]],"Extract system prompts and bypass role-based guardrails."],
 ["Hands-on practice / CTFs",6,[["Gandalf","https://gandalf.lakera.ai/"]],"Beat all Gandalf levels; write up your approach."]]],
 
 ["4. Red Team Methodology & Tooling","Process + tools professionals use.",[
@@ -91,8 +92,10 @@ const M=[
 ["Advanced Context Routing",5,[["Semantic Router","https://github.com/aurelio-labs/semantic-router"]],"Implement a semantic router that isolates malicious intents."],
 ["Managing Long-Term Memory (Mem0/Zep)",6,[["Mem0","https://github.com/mem0ai/mem0"],["Zep","https://getzep.com/"]],"Integrate Mem0 into an agent; red-team the extracted memories for injection payloads."]]],
 
-["7. Agentic Security & Protocols","Highest-value specialisation right now.",[
+["7. Agentic Security & Protocols","Highest-value specialisation right now (OWASP LLM06, LLM05, LLM10).",[
 ["Excessive agency & tool misuse",5,[["OWASP LLM06","https://genai.owasp.org/llm-top-10/"]],"Test least-privilege on a tool-using agent."],
+["Improper Output Handling (XSS/RCE via LLM)",5,[["OWASP LLM05","https://genai.owasp.org/llm-top-10/"]],"Exploit an agent's markdown rendering for XSS."],
+["Unbounded Consumption & Denial of Wallet",4,[["OWASP LLM10","https://genai.owasp.org/llm-top-10/"]],"Design an attack that loops an agent to drain API credits."],
 ["Lethal trifecta & exfiltration",3,[["Simon Willison","https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/"]],"Find trifecta conditions in 3 real agent designs."],
 ["MCP security (tool poisoning)",5,[["Invariant Labs","https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks"]],"Build a malicious MCP server and attack your client."],
 ["Agent Benchmarks (AgentDojo)",6,[["AgentDojo","https://github.com/ethz-spylab/agentdojo"]],"Run AgentDojo; report utility vs security."]]],
@@ -115,8 +118,9 @@ const M=[
 ["GPU Provisioning & Auto-scaling on EKS",6,[["AWS Karpenter","https://karpenter.sh/"]],"Configure Karpenter to spin up/down GPU nodes based on inference queue length."],
 ["Securing Agent Clusters (Network Policies)",6,[["Cilium / Calico","https://cilium.io/"]],"Implement strict Network Policies in EKS so the LLM pod cannot access the IAM metadata endpoint (SSRF prevention)."]]],
 
-["11. Evaluation Science (Level-up)","Deepen what you already do.",[
+["11. Evaluation Science (Level-up)","Deepen what you already do (OWASP LLM09).",[
 ["LLM-as-judge reliability, bias, calibration",4,[["MT-Bench","https://arxiv.org/abs/2306.05685"]],"Measure your judge's agreement with human labels."],
+["Detecting Misinformation & Overreliance",4,[["OWASP LLM09","https://genai.owasp.org/llm-top-10/"]],"Build a cross-verification pipeline to detect hallucinated factual inaccuracies."],
 ["Statistics for evals: CIs, power",4,[["Inspect AI","https://inspect.aisi.org.uk/"]],"Add statistical reporting to every report."],
 ["Safety-vs-utility trade-offs",3,[["JailbreakBench","https://arxiv.org/abs/2404.01318"]],"Add benign-but-borderline set."]]],
 
