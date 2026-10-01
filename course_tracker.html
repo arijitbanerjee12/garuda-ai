@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced AI QA & Red Teaming Curriculum</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .completed { text-decoration: line-through; color: #9ca3af; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans p-8">
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+        <h1 class="text-3xl font-bold mb-2 text-indigo-700">Advanced AI QA & Red Teaming Curriculum</h1>
+        <p class="text-gray-600 mb-6">Designed for engineers with foundational LLM validation & autonomous agent experience. Progress is saved locally in your browser.</p>
+        
+        <div class="mb-4">
+            <span class="font-bold text-gray-700">Overall Progress: </span>
+            <span id="progress-text" class="text-indigo-600 font-bold">0%</span>
+            <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                <div id="progress-bar" class="bg-indigo-600 h-2.5 rounded-full" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div id="curriculum-container" class="space-y-6">
+            <!-- Dynamically populated by JS -->
+        </div>
+    </div>
+
+    <script>
+        const curriculum = [
+            {
+                module: "Module 1: Industry Standards & Compliance Frameworks",
+                duration: "2 Weeks",
+                topics: [
+                    { id: "m1t1", title: "OWASP Top 10 for LLM Applications", resources: "<a href='https://owasp.org/www-project-top-10-for-large-language-model-applications/' class='text-blue-500 hover:underline' target='_blank'>OWASP Docs</a>", time: "5 hrs" },
+                    { id: "m1t2", title: "MITRE ATLAS (Adversarial Threat Landscape for AI Systems)", resources: "<a href='https://atlas.mitre.org/' class='text-blue-500 hover:underline' target='_blank'>MITRE Matrix</a>", time: "4 hrs" },
+                    { id: "m1t3", title: "NIST AI Risk Management Framework (RMF)", resources: "<a href='https://www.nist.gov/itl/ai-risk-management-framework' class='text-blue-500 hover:underline' target='_blank'>NIST Guidelines</a>", time: "5 hrs" }
+                ]
+            },
+            {
+                module: "Module 2: Advanced LLM Red Teaming & Vulnerabilities",
+                duration: "3 Weeks",
+                topics: [
+                    { id: "m2t1", title: "Indirect Prompt Injection (Data Exfiltration & SSRF)", resources: "Read: <a href='https://greshake.github.io/' class='text-blue-500 hover:underline' target='_blank'>Compromising LLM Integrations</a>", time: "6 hrs" },
+                    { id: "m2t2", title: "Model Inversion & Training Data Extraction", resources: "Paper: Extracting Training Data from Diffusion Models / LLMs", time: "4 hrs" },
+                    { id: "m2t3", title: "Jailbreaking Automations (GCG, PAIR, TAP)", resources: "Explore algorithms that automate prompt injection discovery.", time: "8 hrs" },
+                    { id: "m2t4", title: "Tool & Plugin Vulnerabilities (RCE via Agent Tools)", resources: "Practice finding flaws in agent-tool execution layers.", time: "6 hrs" }
+                ]
+            },
+            {
+                module: "Module 3: Multi-Agent & RAG Security",
+                duration: "3 Weeks",
+                topics: [
+                    { id: "m3t1", title: "Context Poisoning in RAG pipelines", resources: "Injecting malicious text into Vector Databases to manipulate generation.", time: "5 hrs" },
+                    { id: "m3t2", title: "Cross-Agent Exploitation", resources: "How a compromised agent can laterally infect a multi-agent swarm.", time: "6 hrs" },
+                    { id: "m3t3", title: "Vector DB Security (Access Control, Segmentation)", resources: "Securing Pinecone/Chroma environments from tenant crossover.", time: "4 hrs" }
+                ]
+            },
+            {
+                module: "Module 4: Enterprise Tooling for Offensive/Defensive AI",
+                duration: "2 Weeks",
+                topics: [
+                    { id: "m4t1", title: "Promptfoo (Advanced Red Teaming configurations)", resources: "<a href='https://promptfoo.dev/' class='text-blue-500 hover:underline' target='_blank'>Promptfoo Docs</a>", time: "5 hrs" },
+                    { id: "m4t2", title: "Microsoft PyRIT (Python Risk Identification Tool)", resources: "<a href='https://github.com/Azure/PyRIT' class='text-blue-500 hover:underline' target='_blank'>PyRIT Repo</a>", time: "5 hrs" },
+                    { id: "m4t3", title: "Nemo Guardrails / Llama Guard", resources: "Implementing defensive routing and semantic filtering.", time: "6 hrs" }
+                ]
+            }
+        ];
+
+        const container = document.getElementById('curriculum-container');
+        
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            const total = checkboxes.length;
+            const checked = document.querySelectorAll('.task-checkbox:checked').length;
+            const percent = Math.round((checked / total) * 100);
+            
+            document.getElementById('progress-text').innerText = `${percent}%`;
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+
+            checkboxes.forEach(cb => {
+                const label = document.getElementById(`label-${cb.id}`);
+                if(cb.checked) label.classList.add('completed');
+                else label.classList.remove('completed');
+                localStorage.setItem(cb.id, cb.checked);
+            });
+        }
+
+        curriculum.forEach((mod, mIndex) => {
+            let html = `
+            <div class="border rounded-lg p-5 shadow-sm bg-gray-50 border-gray-200">
+                <h2 class="text-xl font-bold text-gray-800 mb-1">${mod.module}</h2>
+                <span class="text-sm font-semibold text-indigo-600 bg-indigo-100 px-2 py-1 rounded">Estimated: ${mod.duration}</span>
+                <ul class="mt-4 space-y-3">
+            `;
+            
+            mod.topics.forEach(topic => {
+                html += `
+                    <li class="flex items-start bg-white p-3 rounded border border-gray-100">
+                        <input type="checkbox" id="${topic.id}" class="task-checkbox mt-1.5 mr-3 h-4 w-4 text-indigo-600 rounded">
+                        <div class="flex-1">
+                            <label id="label-${topic.id}" for="${topic.id}" class="font-medium text-gray-800 cursor-pointer text-lg">${topic.title}</label>
+                            <p class="text-sm text-gray-500 mt-1"><strong>Est. Time:</strong> ${topic.time} | <strong>Resources:</strong> ${topic.resources}</p>
+                        </div>
+                    </li>
+                `;
+            });
+            html += `</ul></div>`;
+            container.innerHTML += html;
+        });
+
+        document.querySelectorAll('.task-checkbox').forEach(cb => {
+            const savedState = localStorage.getItem(cb.id);
+            if (savedState === 'true') cb.checked = true;
+            cb.addEventListener('change', updateProgress);
+        });
+
+        updateProgress();
+    </script>
+</body>
+</html>
