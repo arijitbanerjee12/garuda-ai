@@ -1,122 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced AI QA & Red Teaming Curriculum</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .completed { text-decoration: line-through; color: #9ca3af; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>8-Month Advanced AI QA, Red Teaming & Agentic Security</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f6f7f9;--card:#fff;--tx:#1b1f27;--mu:#5d6675;--bd:#dde1e8;--ac:#4f46e5;--ok:#16a34a;--quiz:#f59e0b;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1218;--card:#181c25;--tx:#e6e9f0;--mu:#98a2b3;--bd:#2a3040;--ac:#818cf8;--ok:#4ade80;--quiz:#fbbf24;}}
+:root[data-theme="dark"]{--bg:#0f1218;--card:#181c25;--tx:#e6e9f0;--mu:#98a2b3;--bd:#2a3040;--ac:#818cf8;--ok:#4ade80;--quiz:#fbbf24;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.w{max-width:1000px;margin:0 auto;padding:16px}
+h1{font-size:24px;margin:8px 0 4px}p.s{color:var(--mu);margin:0 0 12px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:5;border-bottom:1px solid var(--bd)}
+.bar{height:10px;background:var(--bd);border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px;font-size:13px;color:var(--mu)}
+button{background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:6px 10px;cursor:pointer;font:inherit;font-size:13px}
+button:hover{border-color:var(--ac)}
+.m{background:var(--card);border:1px solid var(--bd);border-radius:12px;margin:12px 0}
+.m>summary{padding:12px 14px;cursor:pointer;font-weight:600;list-style:none;display:flex;gap:10px;justify-content:space-between;align-items:center}
+.m>summary small{font-weight:400;color:var(--mu);white-space:nowrap}
+.g{padding:0 14px 6px;color:var(--mu);font-size:13px}
+.t{display:flex;gap:10px;padding:14px;border-top:1px solid var(--bd); flex-direction: column;}
+.t-head {display: flex; gap: 10px;}
+.t-head input[type=checkbox]{width:18px;height:18px;margin-top:3px;accent-color:var(--ok);flex:none; cursor:pointer;}
+.t.d .n{text-decoration:line-through;opacity:.55}
+.n{font-weight:600; font-size: 15px;}.h{font-size:12px;color:var(--ac);margin-left:6px;font-weight:500; background: rgba(79, 70, 229, 0.1); padding: 2px 6px; border-radius: 4px;}
+.t-body{margin-left: 28px; display:flex; flex-direction: column; gap: 8px;}
+.k{font-size:13.5px;color:var(--mu);margin:2px 0}
+.l a{display:inline-block;margin:2px 8px 2px 0;color:var(--ac);font-size:13px;word-break:break-word; text-decoration:none; font-weight: 500;}
+.l a:hover{text-decoration: underline;}
+.box{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin:12px 0;font-size:14px}
+.box li{margin:3px 0}
+.interactive-section { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+.interactive-section textarea { flex: 1; min-width: 200px; min-height: 60px; background: var(--bg); border: 1px solid var(--bd); border-radius: 6px; padding: 8px; color: var(--tx); font-size: 13px; font-family: inherit; resize: vertical; }
+.interactive-section textarea:focus { outline: none; border-color: var(--ac); }
+.interactive-section textarea::placeholder { color: var(--mu); opacity: 0.7; }
+.quiz-btn { background: rgba(245, 158, 11, 0.1); color: var(--quiz); border-color: var(--quiz); font-weight: 600; }
+.quiz-btn:hover { background: var(--quiz); color: #fff; }
+</style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans p-8">
-    <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
-        <h1 class="text-3xl font-bold mb-2 text-indigo-700">Advanced AI QA & Red Teaming Curriculum</h1>
-        <p class="text-gray-600 mb-6">Designed for engineers with foundational LLM validation & autonomous agent experience. Progress is saved locally in your browser.</p>
-        
-        <div class="mb-4">
-            <span class="font-bold text-gray-700">Overall Progress: </span>
-            <span id="progress-text" class="text-indigo-600 font-bold">0%</span>
-            <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                <div id="progress-bar" class="bg-indigo-600 h-2.5 rounded-full" style="width: 0%"></div>
+<body>
+<div class="w">
+<h1>8-Month Advanced AI QA, Red Teaming & Agentic Security</h1>
+<p class="s">Extended 32-week curriculum including EKS infrastructure, Advanced Inference, Langfuse, and Context Management. Progress and notes save locally in your browser.</p>
+<div class="top"><div class="bar"><i id="pb"></i></div>
+<div class="row"><span id="st"></span><span style="flex:1"></span>
+<button id="hd">Hide done</button><button id="ex">Export</button><button id="im">Import</button><button id="rs">Reset</button><button id="th">Theme</button></div></div>
+<div class="box"><b>How to use</b><ul>
+<li>Pace: ~8–10 h/week → ~32 weeks (8 Months). Every topic ends with a <b>Deliverable</b>.</li>
+<li>Use the <b>Notes</b> and <b>Doubts</b> text boxes under each topic to journal your learnings.</li>
+<li>Click <b>Take Quiz</b> to self-assess (opens external prompt/quiz generator).</li></ul></div>
+<div id="app"></div>
+<input type="file" id="fi" accept=".json" hidden>
+</div>
+<script>
+const M=[
+["1. Standards & Threat Map","Learn the vocabulary every employer/client expects.",[
+["OWASP Top 10 for LLM Apps (2025)",4,[["OWASP GenAI","https://genai.owasp.org/llm-top-10/"]],"Map each of the 10 risks to a test category."],
+["MITRE ATLAS tactics & techniques",3,[["ATLAS","https://atlas.mitre.org/"]],"Tag 15 of your test cases with ATLAS IDs."],
+["NIST AI 100-2 adversarial ML taxonomy",3,[["NIST","https://csrc.nist.gov/pubs/ai/100/2/e2025/final"]],"Cheat sheet: attack class → stage → mitigation."],
+["OWASP Agentic Security Initiative",3,[["OWASP ASI","https://genai.owasp.org/initiatives/agentic-security-initiative/"]],"Threat-model your evaluator agent."]]],
+
+["2. QA Engineering for AI Systems","Make testing rigorous, repeatable and CI-native.",[
+["Test design for non-deterministic systems",5,[["DeepEval","https://deepeval.com/docs"],["Ragas","https://docs.ragas.io"]],"Add multi-run sampling and flakiness budget."],
+["Metamorphic & property-based testing",4,[["Hypothesis","https://hypothesis.readthedocs.io"]],"Write 5 metamorphic relations for a RAG app."],
+["Inspect AI & Advanced Evals",5,[["Inspect AI","https://github.com/UKGovernmentBEIS/inspect_ai"]],"Port one suite to Inspect; compare ergonomics."],
+["CI/CD gating & Regression",4,[["promptfoo CI","https://www.promptfoo.dev/docs/integrations/ci-cd/"]],"Fail PRs on security-score regressions."]]],
+
+["3. Prompt Injection & Jailbreaks","The core offensive skill set.",[
+["Direct vs indirect prompt injection",5,[["Greshake et al.","https://arxiv.org/abs/2302.12173"],["PortSwigger","https://portswigger.net/web-security/llm-attacks"]],"Finish PortSwigger LLM labs."],
+["Jailbreak families (Roleplay, Encoding)",5,[["Many-shot","https://www.anthropic.com/research/many-shot-jailbreaking"]],"Build a 100-prompt taxonomy-labelled attack set."],
+["Hands-on practice / CTFs",6,[["Gandalf","https://gandalf.lakera.ai/"]],"Beat all Gandalf levels; write up your approach."]]],
+
+["4. Red Team Methodology & Tooling","Process + tools professionals use.",[
+["Red teaming in practice",3,[["Microsoft paper","https://arxiv.org/abs/2501.07238"]],"Write your own red-team plan template."],
+["garak (vulnerability scanner)",5,[["garak","https://github.com/NVIDIA/garak"]],"Scan a local model + an API app; triage findings."],
+["PyRIT (orchestrated multi-turn attacks)",6,[["PyRIT","https://github.com/Azure/PyRIT"]],"Run an orchestrator against your sandbox bot."],
+["promptfoo red team & DeepTeam",5,[["promptfoo","https://www.promptfoo.dev/docs/red-team/"]],"Compare coverage and FPR."]]],
+
+["5. Automated Attack Algorithms & Benchmarks","Understand how attacks are generated and measured.",[
+["PAIR & TAP (LLM-driven attackers)",4,[["PAIR","https://arxiv.org/abs/2310.08419"]],"Implement a mini attacker-judge loop."],
+["Crescendo & multi-turn escalation",3,[["Crescendo","https://arxiv.org/abs/2404.01833"]],"Add a multi-turn escalation mode."],
+["GCG / gradient attacks (conceptual)",3,[["GCG","https://arxiv.org/abs/2307.15043"]],"Summarise transferability."],
+["HarmBench & JailbreakBench",4,[["HarmBench","https://arxiv.org/abs/2402.04249"]],"Reproduce one benchmark slice."]]],
+
+["6. RAG Security & Context Management","Deep dive into vector security and long-term memory.", [
+["Knowledge-base poisoning",5,[["OWASP LLM08","https://genai.owasp.org/llm-top-10/"]],"Poison a test corpus; measure hijack rate."],
+["Data leakage & tenant isolation",4,[["OWASP LLM02","https://genai.owasp.org/llm-top-10/"]],"Write cross-tenant leakage tests."],
+["Advanced Context Routing",5,[["Semantic Router","https://github.com/aurelio-labs/semantic-router"]],"Implement a semantic router that isolates malicious intents."],
+["Managing Long-Term Memory (Mem0/Zep)",6,[["Mem0","https://github.com/mem0ai/mem0"],["Zep","https://getzep.com/"]],"Integrate Mem0 into an agent; red-team the extracted memories for injection payloads."]]],
+
+["7. Agentic Security & Protocols","Highest-value specialisation right now.",[
+["Excessive agency & tool misuse",5,[["OWASP LLM06","https://genai.owasp.org/llm-top-10/"]],"Test least-privilege on a tool-using agent."],
+["Lethal trifecta & exfiltration",3,[["Simon Willison","https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/"]],"Find trifecta conditions in 3 real agent designs."],
+["MCP security (tool poisoning)",5,[["Invariant Labs","https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks"]],"Build a malicious MCP server and attack your client."],
+["Agent Benchmarks (AgentDojo)",6,[["AgentDojo","https://github.com/ethz-spylab/agentdojo"]],"Run AgentDojo; report utility vs security."]]],
+
+["8. Defenses, Guardrails & LLM Observability","Observing, fixing, and routing safely.",[
+["Guardrail stack (NeMo, Llama Guard)",5,[["NeMo Guardrails","https://github.com/NVIDIA/NeMo-Guardrails"]],"Add a guardrail layer; measure over-refusal."],
+["Langfuse (Deep Dive & Integration)",6,[["Langfuse Docs","https://langfuse.com/docs"]],"Instrument your agent with Langfuse. Build dashboards for cost, latency, and trace inspection."],
+["Red Teaming Traces with Langfuse",5,[["Langfuse Evals","https://langfuse.com/docs/scores/evals"]],"Use Langfuse evaluation UI to flag anomalous spans and prompt injections in production traffic."],
+["Design-level defenses & Sandboxing",4,[["OWASP Cheat Sheets","https://cheatsheetseries.owasp.org/"]],"Write a defense-in-depth design review checklist."]]],
+
+["9. Advanced Model Inference & Mechanics","How models actually run in production and how to test them.",[
+["Transformer Architecture & Attention",6,[["3Blue1Brown","https://www.youtube.com/watch?v=wjZofJX0v4M"]],"Explain KV Cache, self-attention, and positional encoding visually in a blog post."],
+["Serving Infrastructure (vLLM, TRT-LLM)",6,[["vLLM","https://vllm.ai/"]],"Deploy a quantized model on vLLM using PagedAttention and benchmark throughput vs latency."],
+["Continuous Batching & Speculative Decoding",4,[["HuggingFace Blog","https://huggingface.co/blog/assisted-generation"]],"Document how speculative decoding impacts security boundaries (if at all)."],
+["Model Quantization & Watermarking",4,[["GPTQ / AWQ","https://arxiv.org/abs/2210.17323"]],"Test if quantized models are more susceptible to jailbreaks than FP16 models."]]],
+
+["10. Kubernetes & Cloud-Native Agentic Infrastructure","Deploying Agents safely on AWS EKS.",[
+["Dockerizing Agentic Workflows",5,[["Docker Docs","https://docs.docker.com/"]],"Containerize an orchestrator agent, a judge agent, and a vector DB via Docker Compose."],
+["AWS EKS Fundamentals for AI",8,[["EKS Workshop","https://www.eksworkshop.com/"]],"Deploy your agent cluster on AWS EKS using Helm charts."],
+["GPU Provisioning & Auto-scaling on EKS",6,[["AWS Karpenter","https://karpenter.sh/"]],"Configure Karpenter to spin up/down GPU nodes based on inference queue length."],
+["Securing Agent Clusters (Network Policies)",6,[["Cilium / Calico","https://cilium.io/"]],"Implement strict Network Policies in EKS so the LLM pod cannot access the IAM metadata endpoint (SSRF prevention)."]]],
+
+["11. Evaluation Science (Level-up)","Deepen what you already do.",[
+["LLM-as-judge reliability, bias, calibration",4,[["MT-Bench","https://arxiv.org/abs/2306.05685"]],"Measure your judge's agreement with human labels."],
+["Statistics for evals: CIs, power",4,[["Inspect AI","https://inspect.aisi.org.uk/"]],"Add statistical reporting to every report."],
+["Safety-vs-utility trade-offs",3,[["JailbreakBench","https://arxiv.org/abs/2404.01318"]],"Add benign-but-borderline set."]]],
+
+["12. Governance, Risk & Reporting","What separates a tester from a consultant.",[
+["NIST AI RMF + GenAI Profile",4,[["NIST RMF","https://www.nist.gov/itl/ai-risk-management-framework"]],"Map your reports to Govern/Map/Measure/Manage."],
+["ISO/IEC 42001 & EU AI Act basics",4,[["EU AI Act","https://artificialintelligenceact.eu/"]],"Cheat sheet: which tests produce which evidence."],
+["Professional red-team reports",3,[["Microsoft paper","https://arxiv.org/abs/2501.07238"]],"Template: severity rubric, repro steps, remediation."]]],
+
+["13. Capstone & Portfolio","Turn learning into visible credibility.",[
+["Deploy Autonomous Red-Team EKS Cluster",20,[["PyRIT","https://github.com/Azure/PyRIT"]],"End-to-end: Deployed on EKS, monitored by Langfuse, attacking a RAG target, generating OWASP reports."],
+["Publish: 3 blog posts or write-ups",8,[["Embrace The Red","https://embracethered.com/blog/"]],"Publish findings on EKS SSRF or Langfuse red-teaming."],
+["Contribute to open source",8,[["garak / promptfoo","https://github.com/NVIDIA/garak"]],"Land at least one merged PR."],
+["Competitions / bug bounties",6,[["Huntr","https://huntr.com/"]],"Hunt for vulnerabilities in open source AI repos."]]]
+];
+
+const K="aisec_cur_v2";let S={},hide=false;
+try{S=JSON.parse(localStorage.getItem(K)||"{}")}catch(e){}
+const sv=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const $=id=>document.getElementById(id);
+
+function takeQuiz(id) {
+    alert("Pro Tip: Copy the topic title and ask ChatGPT/Claude: 'Generate a 5-question multiple choice quiz on [Topic] for an advanced AI security engineer.'");
+}
+
+function render(){let tot=0,done=0,th=0,dh=0,h="";
+M.forEach((m,i)=>{let mt=0,md=0,mh=0,rows="";
+m[2].forEach((t,j)=>{
+    const id=i+"-"+j;
+    const c=!!S[id];
+    const notes = S[`${id}_notes`] || "";
+    const doubts = S[`${id}_doubts`] || "";
+    
+    mt++;mh+=t[1];tot++;th+=t[1];if(c){md++;done++;dh+=t[1]}
+    if(hide&&c)return;
+
+    rows+=`<div class="t${c?" d":""}">
+        <div class="t-head">
+            <input type="checkbox" data-id="${id}"${c?" checked":""}>
+            <div>
+                <span class="n">${t[0]}</span><span class="h">${t[1]} h</span>
+                <div class="k"><b>Deliverable:</b> ${t[3]}</div>
+                <div class="l">${t[2].map(r=>`<a href="${r[1]}" target="_blank" rel="noopener">${r[0]} ↗</a>`).join("")}</div>
             </div>
         </div>
-
-        <div id="curriculum-container" class="space-y-6">
-            <!-- Dynamically populated by JS -->
+        <div class="t-body">
+            <div class="interactive-section">
+                <textarea data-textid="${id}_notes" placeholder="📝 Attach your notes here...">${notes}</textarea>
+                <textarea data-textid="${id}_doubts" placeholder="❓ Log your doubts/questions here...">${doubts}</textarea>
+                <button class="quiz-btn" onclick="takeQuiz('${id}')">Take Quiz 🎓</button>
+            </div>
         </div>
-    </div>
+    </div>`;
+});
+h+=`<details class="m"${S["o"+i]!==0?" open":""} data-o="${i}"><summary><span>${m[0]}</span><small>${md}/${mt} · ${mh} h</small></summary><div class="g">${m[1]}</div>${rows}</details>`});
+$("app").innerHTML=h;
+$("pb").style.width=(tot?done/tot*100:0)+"%";
+$("st").textContent=`${done}/${tot} topics · ${dh}/${th} h done · ~${Math.ceil((th-dh)/9)} weeks left at 9 h/week`
+}
 
-    <script>
-        const curriculum = [
-            {
-                module: "Module 1: Industry Standards & Compliance Frameworks",
-                duration: "2 Weeks",
-                topics: [
-                    { id: "m1t1", title: "OWASP Top 10 for LLM Applications", resources: "<a href='https://owasp.org/www-project-top-10-for-large-language-model-applications/' class='text-blue-500 hover:underline' target='_blank'>OWASP Docs</a>", time: "5 hrs" },
-                    { id: "m1t2", title: "MITRE ATLAS (Adversarial Threat Landscape for AI Systems)", resources: "<a href='https://atlas.mitre.org/' class='text-blue-500 hover:underline' target='_blank'>MITRE Matrix</a>", time: "4 hrs" },
-                    { id: "m1t3", title: "NIST AI Risk Management Framework (RMF)", resources: "<a href='https://www.nist.gov/itl/ai-risk-management-framework' class='text-blue-500 hover:underline' target='_blank'>NIST Guidelines</a>", time: "5 hrs" }
-                ]
-            },
-            {
-                module: "Module 2: Advanced LLM Red Teaming & Vulnerabilities",
-                duration: "3 Weeks",
-                topics: [
-                    { id: "m2t1", title: "Indirect Prompt Injection (Data Exfiltration & SSRF)", resources: "Read: <a href='https://greshake.github.io/' class='text-blue-500 hover:underline' target='_blank'>Compromising LLM Integrations</a>", time: "6 hrs" },
-                    { id: "m2t2", title: "Model Inversion & Training Data Extraction", resources: "Paper: Extracting Training Data from Diffusion Models / LLMs", time: "4 hrs" },
-                    { id: "m2t3", title: "Jailbreaking Automations (GCG, PAIR, TAP)", resources: "Explore algorithms that automate prompt injection discovery.", time: "8 hrs" },
-                    { id: "m2t4", title: "Tool & Plugin Vulnerabilities (RCE via Agent Tools)", resources: "Practice finding flaws in agent-tool execution layers.", time: "6 hrs" }
-                ]
-            },
-            {
-                module: "Module 3: Multi-Agent & RAG Security",
-                duration: "3 Weeks",
-                topics: [
-                    { id: "m3t1", title: "Context Poisoning in RAG pipelines", resources: "Injecting malicious text into Vector Databases to manipulate generation.", time: "5 hrs" },
-                    { id: "m3t2", title: "Cross-Agent Exploitation", resources: "How a compromised agent can laterally infect a multi-agent swarm.", time: "6 hrs" },
-                    { id: "m3t3", title: "Vector DB Security (Access Control, Segmentation)", resources: "Securing Pinecone/Chroma environments from tenant crossover.", time: "4 hrs" }
-                ]
-            },
-            {
-                module: "Module 4: Enterprise Tooling for Offensive/Defensive AI",
-                duration: "2 Weeks",
-                topics: [
-                    { id: "m4t1", title: "Promptfoo (Advanced Red Teaming configurations)", resources: "<a href='https://promptfoo.dev/' class='text-blue-500 hover:underline' target='_blank'>Promptfoo Docs</a>", time: "5 hrs" },
-                    { id: "m4t2", title: "Microsoft PyRIT (Python Risk Identification Tool)", resources: "<a href='https://github.com/Azure/PyRIT' class='text-blue-500 hover:underline' target='_blank'>PyRIT Repo</a>", time: "5 hrs" },
-                    { id: "m4t3", title: "Nemo Guardrails / Llama Guard", resources: "Implementing defensive routing and semantic filtering.", time: "6 hrs" }
-                ]
-            }
-        ];
+document.addEventListener("change",e=>{
+    const id=e.target.dataset&&e.target.dataset.id;
+    if(id){S[id]=e.target.checked?1:0;sv();render()}
+});
 
-        const container = document.getElementById('curriculum-container');
-        
-        function updateProgress() {
-            const checkboxes = document.querySelectorAll('.task-checkbox');
-            const total = checkboxes.length;
-            const checked = document.querySelectorAll('.task-checkbox:checked').length;
-            const percent = Math.round((checked / total) * 100);
-            
-            document.getElementById('progress-text').innerText = `${percent}%`;
-            document.getElementById('progress-bar').style.width = `${percent}%`;
+document.addEventListener("input",e=>{
+    const tid=e.target.dataset&&e.target.dataset.textid;
+    if(tid){S[tid]=e.target.value;sv();}
+});
 
-            checkboxes.forEach(cb => {
-                const label = document.getElementById(`label-${cb.id}`);
-                if(cb.checked) label.classList.add('completed');
-                else label.classList.remove('completed');
-                localStorage.setItem(cb.id, cb.checked);
-            });
-        }
-
-        curriculum.forEach((mod, mIndex) => {
-            let html = `
-            <div class="border rounded-lg p-5 shadow-sm bg-gray-50 border-gray-200">
-                <h2 class="text-xl font-bold text-gray-800 mb-1">${mod.module}</h2>
-                <span class="text-sm font-semibold text-indigo-600 bg-indigo-100 px-2 py-1 rounded">Estimated: ${mod.duration}</span>
-                <ul class="mt-4 space-y-3">
-            `;
-            
-            mod.topics.forEach(topic => {
-                html += `
-                    <li class="flex items-start bg-white p-3 rounded border border-gray-100">
-                        <input type="checkbox" id="${topic.id}" class="task-checkbox mt-1.5 mr-3 h-4 w-4 text-indigo-600 rounded">
-                        <div class="flex-1">
-                            <label id="label-${topic.id}" for="${topic.id}" class="font-medium text-gray-800 cursor-pointer text-lg">${topic.title}</label>
-                            <p class="text-sm text-gray-500 mt-1"><strong>Est. Time:</strong> ${topic.time} | <strong>Resources:</strong> ${topic.resources}</p>
-                        </div>
-                    </li>
-                `;
-            });
-            html += `</ul></div>`;
-            container.innerHTML += html;
-        });
-
-        document.querySelectorAll('.task-checkbox').forEach(cb => {
-            const savedState = localStorage.getItem(cb.id);
-            if (savedState === 'true') cb.checked = true;
-            cb.addEventListener('change', updateProgress);
-        });
-
-        updateProgress();
-    </script>
+document.addEventListener("toggle",e=>{const o=e.target.dataset&&e.target.dataset.o;if(o!==undefined){S["o"+o]=e.target.open?1:0;sv()}},true);
+$("hd").onclick=()=>{hide=!hide;$("hd").textContent=hide?"Show done":"Hide done";render()};
+$("rs").onclick=()=>{if(confirm("Reset all progress and clear notes?")){S={};sv();render()}};
+$("th").onclick=()=>{const r=document.documentElement,d=r.dataset.theme==="dark"||(!r.dataset.theme&&matchMedia("(prefers-color-scheme:dark)").matches);r.dataset.theme=d?"light":"dark"};
+$("ex").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:"application/json"}));a.download="progress_v2.json";a.click()};
+$("im").onclick=()=>$("fi").click();
+$("fi").onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{S=JSON.parse(t);sv();render()}catch(x){alert("Invalid file")}})};
+render();
+</script>
 </body>
 </html>
