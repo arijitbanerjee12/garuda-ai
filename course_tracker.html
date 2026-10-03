@@ -94,6 +94,7 @@ const M=[
 
 ["7. Agentic Security & Protocols","Highest-value specialisation right now (OWASP LLM06, LLM05, LLM10).",[
 ["Excessive agency & tool misuse",5,[["OWASP LLM06","https://genai.owasp.org/llm-top-10/"]],"Test least-privilege on a tool-using agent."],
+["Validating MCP Tool Correctness & Accuracy",6,[["MCP Spec","https://github.com/modelcontextprotocol/specification"]],"Write an evaluator that verifies if an agent called an MCP tool with correct parameters and logic."],
 ["Improper Output Handling (XSS/RCE via LLM)",5,[["OWASP LLM05","https://genai.owasp.org/llm-top-10/"]],"Exploit an agent's markdown rendering for XSS."],
 ["Unbounded Consumption & Denial of Wallet",4,[["OWASP LLM10","https://genai.owasp.org/llm-top-10/"]],"Design an attack that loops an agent to drain API credits."],
 ["Lethal trifecta & exfiltration",3,[["Simon Willison","https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/"]],"Find trifecta conditions in 3 real agent designs."],
@@ -102,6 +103,7 @@ const M=[
 
 ["8. Defenses, Guardrails & LLM Observability","Observing, fixing, and routing safely.",[
 ["Guardrail stack (NeMo, Llama Guard)",5,[["NeMo Guardrails","https://github.com/NVIDIA/NeMo-Guardrails"]],"Add a guardrail layer; measure over-refusal."],
+["Classifier-based Validation (Evals/Llama Guard)",4,[["Llama Guard","https://huggingface.co/meta-llama/LlamaGuard-7b"]],"Validate outputs using a classifier-like system to evaluate safety/accuracy scores."],
 ["Langfuse (Deep Dive & Integration)",6,[["Langfuse Docs","https://langfuse.com/docs"]],"Instrument your agent with Langfuse. Build dashboards for cost, latency, and trace inspection."],
 ["Red Teaming Traces with Langfuse",5,[["Langfuse Evals","https://langfuse.com/docs/scores/evals"]],"Use Langfuse evaluation UI to flag anomalous spans and prompt injections in production traffic."],
 ["Design-level defenses & Sandboxing",4,[["OWASP Cheat Sheets","https://cheatsheetseries.owasp.org/"]],"Write a defense-in-depth design review checklist."]]],
